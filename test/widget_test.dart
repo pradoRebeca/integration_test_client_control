@@ -77,24 +77,22 @@ void main() {
       expect(find.byType(Icon), findsNWidgets(25));
     });
 
-    testWidgets('IconPicker click in icon exist', (tester) async {
-      IconData? iconSelected;
-
+    testWidgets('IconPicker click in exist Icon', (tester) async {
       await tester.pumpWidget(MaterialApp(
         home: Builder(
           builder: (context) => TextButton(
-            onPressed: () async =>
-                iconSelected = await showIconPicker(context: context),
+            onPressed: () async => await showIconPicker(context: context),
             child: const Text("show icon picker"),
           ),
         ),
       ));
 
-      await tester.tap(find.byType(TextButton));
+      const IconData icon = Icons.card_giftcard;
 
+      await tester.tap(find.byType(TextButton));
       await tester.pumpAndSettle();
 
-      expect(find.byIcon(iconSelected!), findsOneWidget);
+      expect(find.byIcon(icon), findsOneWidget);
     });
   });
 }
